@@ -95,7 +95,7 @@ else:
 # SETTINGS
 pam.nmlSet["radar_mode"] = 'moments'
 pam.set['verbose'] = 0 # set verbosity levels
-pam.set['pyVerbose'] = 1 # change to 0 if you do not want to see job progress number
+pam.set['pyVerbose'] = 0 # change to 0 if you do not want to see job progress number
 pam.p['turb_edr'][:] = 1.0e-4
 pam.nmlSet['radar_airmotion'] = True
 pam.nmlSet['radar_airmotion_vmin'] = 0.0 # workaround to potential bug in radar_spectrum
