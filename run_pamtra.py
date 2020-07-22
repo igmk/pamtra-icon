@@ -1,5 +1,12 @@
 from __future__ import division
 from sys import argv
+
+#################################################
+# temporary workaround issue #24
+import os
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+#################################################
+
 import pyPamtra
 import numpy as np
 import argparse
@@ -58,6 +65,7 @@ def overwrite_pam(pam, p, Set, nmlSet):
 
 if not len(argv)-1:
 	parser.print_help()
+	exit()
 args = parser.parse_args()
 
 timeidx = eval(args.timeidx)
@@ -71,7 +79,6 @@ hydrostr = args.hydroset
 cores = args.numproc
 descFile = descFilesLib[args.descriptorfile]
 
-print radarstr, hydrostr, cores
 print args
 
 if '1mom' in args.descriptorfile:
