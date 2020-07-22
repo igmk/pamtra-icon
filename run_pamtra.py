@@ -31,7 +31,7 @@ parser.add_argument('-hy','--hydroset', default='all_hydro',
 	                help='gimme hydrosettings I will look into my library to switch on and off hydrometeor content accordingly',
 	                choices=hydrodict.keys())
 
-parser.add_argument('-sp','--savepath', default='./',
+parser.add_argument('-sp','--savepath', default='./dummy.nc',
 	                help='gimme fulldatapath for saving output')
 
 parser.add_argument('-np', '--numproc', type=int, default=2,
@@ -116,7 +116,7 @@ def run_radar_simulation(pam, radarname, hydroconf):
 	pam, frequency = set_radar_properties(pam, radarlib, radarname)
 	pam = overwrite_pam(pam, forceP, forceSet, forceNmlSet)
 	pam.runParallelPamtra(np.array([frequency]), pp_deltaX=1, pp_deltaY=1, pp_deltaF=1, pp_local_workers=cores)
-	pam.writeResultsToNetCDF(args.savepath+hydroconf+'_'+pam.nmlSet["radar_mode"][:3]+'_'+radarname+'.nc')
+	pam.writeResultsToNetCDF(args.savepath)
 	return pam
 
 def runPassive89(pam):
@@ -126,7 +126,7 @@ def runPassive89(pam):
 		pam = overwrite_pam(pam, forceP, forceSet, forceNmlSet)
 		frequencies = [89.0]
 		pam.runParallelPamtra(np.array(frequencies), pp_deltaX=1, pp_deltaY=1, pp_deltaF=1, pp_local_workers=cores)
-		pam.writeResultsToNetCDF(args.savepath+'joy94_passive89.nc') # SAVE OUTPUT
+		pam.writeResultsToNetCDF(args.savepath) # SAVE OUTPUT
 		return pam
 
 # RUN PAMTRA
