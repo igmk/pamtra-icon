@@ -17,7 +17,7 @@ Joyrad94nml = {'radar_fwhr_beamwidth_deg':0.5,
                'radar_min_v':-6.8,
                'radar_nfft':512,
                'radar_no_ave':17,
-               'radar_pnoise0':-29.5
+               'radar_pnoise0':-29.5,
                'radar_peak_min_snr': -15,
                'frequency':94.0}
 
