@@ -29,7 +29,7 @@ As an example to reproduce the plots from the awipev station do
 ```
   python plot_rad94_awipev.py -s <full/path/figurename.png>  
                               -r <pamtra_output_radar.nc>
-                              -s <pamtra_output_passive.nc>
+                              -p <pamtra_output_passive.nc>
 ```
 All arguments are optional. The default figure name is dummy.png  
 If either the radar or the passive (or both!!) files are not provided the corresponding subplots will be left empty
