@@ -4,7 +4,7 @@ Created on Wed Nov 29 17:34:01 2017
 
 @author: dori
 """
-
+from __future__ import print_function, division
 import netCDF4 as nc
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
@@ -41,7 +41,7 @@ args = parser.parse_args()
 runFile94 = args.radar
 passive89file = args.passive
 savefigure = args.save
-print runFile94, passive89file, savefigure
+print(runFile94, passive89file, savefigure)
 
 # Define Plotting Function
 def plot_variable(x, y, v, axes, fig=None,

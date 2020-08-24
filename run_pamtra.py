@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division, print_function
 from sys import argv
 
 #################################################
@@ -79,7 +79,7 @@ hydrostr = args.hydroset
 cores = args.numproc
 descFile = descFilesLib[args.descriptorfile]
 
-print args
+print(args)
 
 if '1mom' in args.descriptorfile:
 	pam = pyPamtra.importer.readIcon1momMeteogram(args.icon,
@@ -106,9 +106,9 @@ def set_radar_properties(pam, radarlib, radar):
 	pam.nmlSet['passive'] = False
 	radarbook = radarlib[radar]
 	for k in radarbook.keys():
-		print k
+		print(k)
 		if 'radar' in k: # avoid to set frequency in the nmlSet
-			print k, radarbook[k]
+			print(k, radarbook[k])
 			pam.nmlSet[k] = radarbook[k]
 	return pam, radarbook['frequency']
 
@@ -119,18 +119,32 @@ def run_radar_simulation(pam, radarname, hydroconf):
 	pam.writeResultsToNetCDF(args.savepath)
 	return pam
 
-def runPassive89(pam):
-		# SETTINGS
-		pam.nmlSet['active'] = False
-		pam.nmlSet['passive'] = True # Passive is time consuming
-		pam = overwrite_pam(pam, forceP, forceSet, forceNmlSet)
-		frequencies = [89.0]
-		pam.runParallelPamtra(np.array(frequencies), pp_deltaX=1, pp_deltaY=1, pp_deltaF=1, pp_local_workers=cores)
-		pam.writeResultsToNetCDF(args.savepath) # SAVE OUTPUT
-		return pam
+def runPassive89(pam): # the difference wrt Hatpro is only the frequency list ... perhaps 1 function is enough
+	# SETTINGS
+	pam.nmlSet['active'] = False
+	pam.nmlSet['passive'] = True
+	pam = overwrite_pam(pam, forceP, forceSet, forceNmlSet)
+	frequencies = [89.0]
+	pam.runParallelPamtra(np.array(frequencies), pp_deltaX=1, pp_deltaY=1, pp_deltaF=1, pp_local_workers=cores)
+	pam.writeResultsToNetCDF(args.savepath) # SAVE OUTPUT
+	return pam
+
+def runHatpro(pam):
+	# SETTINGS
+	pam.nmlSet['active'] = False
+	pam.nmlSet['passive'] = True
+	pam = overwrite_pam(pam, forceP, forceSet, forceNmlSet)
+	f_hatpro_Kband = [22.24, 23.04, 23.84, 25.44, 26.24, 27.84, 31.40]
+	f_hatpro_Vband = [51.26, 52.28, 53.86, 54.94, 56.66, 57.30, 58.00]
+	frequencies = f_hatpro_Kband + f_hatpro_Vband
+	pam.runParallelPamtra(np.array(frequencies), pp_deltaX=1, pp_deltaY=1, pp_deltaF=1, pp_local_workers=cores)
+	pam.writeResultsToNetCDF(args.savepath) # SAVE OUTPUT
+	return pam
 
 # RUN PAMTRA
 if (radarstr == 'joy94_passive89'):
 	pam = runPassive89(pam)
+elif (radarstr == 'hatpro'):
+	pam = runHatpro(pam)
 else:
 	pam = run_radar_simulation(pam, radarstr, hydrostr)
