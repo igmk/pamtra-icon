@@ -26,7 +26,7 @@ declare -a radar_names=("Joyrad94") # "Joyrad10" "Joyrad35" "Grarad94"
 
 
 
-newdata=1
+newdata=0
 DAY=$FIRST_DAY
 echo $DAY $TODAY
 until [[ ${DAY} > ${TODAY} ]]; do
