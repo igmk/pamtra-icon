@@ -14,10 +14,11 @@ CODE_PATH=/net/ora/develop/pamtra-icon/
 FIRST_DAY='20151111'
 TODAY='20160106' ##`date +%Y%m%d`
 
-declare -a hydro_combo=("all_hydro") # "no_snow" "only_snow" "only_liquid" "only_ice" "only_graupel_hail")
+declare -a hydro_combo=("all_hydro" "no_snow" "only_snow" "only_liquid" "only_ice" "only_graupel_hail")
 declare -a radar_names=("Joyrad94" "KiXPol" "Joyrad35")
 
 newdata=0
+newpassive=0
 DAY=$FIRST_DAY
 echo $DAY $TODAY
 until [[ ${DAY} > ${TODAY} ]]; do
@@ -31,8 +32,11 @@ until [[ ${DAY} > ${TODAY} ]]; do
 			echo "passive "${DAY}" already done"
 		else
 			python3 ${CODE_PATH}run_pamtra.py -i ${ICON_file} -sp ${passiveFile} -hy all_hydro -r hatpro -np ${NP} > ${CODE_PATH}pamtra${DAY}_hatpro.out
+			newpassive=1
 		fi
-    python ${CODE_PATH}plot_hatpro.py -s ${plotFile} -p ${passiveFile} -i ${ICON_file} # plot every time
+		if [ "$newpassive" -eq "1" ]; then
+			python ${CODE_PATH}plot_hatpro.py -s ${plotFile} -p ${passiveFile} -i ${ICON_file}
+		fi
 		for hydro in "${hydro_combo[@]}"; do
 			mkdir -p ${DATA_PATH}/${hydro}
 			mkdir -p ${PLOT_PATH}/${hydro}
