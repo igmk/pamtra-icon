@@ -5,6 +5,8 @@ Created on Wed Nov 29 17:34:01 2017
 @author: dori
 """
 from __future__ import print_function
+import matplotlib
+matplotlib.use('Agg')
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 plt.close('all')

@@ -5,6 +5,8 @@ Created on Wed Nov 29 17:34:01 2017
 @author: dori
 """
 from __future__ import print_function, division
+import matplotlib
+matplotlib.use('Agg')
 import netCDF4 as nc
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
