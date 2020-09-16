@@ -55,7 +55,7 @@ until [[ ${DAY} > ${TODAY} ]]; do
 			if [ "$newdata" -eq "1" ]; then
 				plotFile=${PLOT_PATH}/all_hydro/${DAY}all_hydropamtra94nya.png
 				echo "Newdata ... plotting"
-				python2 plot_rad94_awipev.py -s ${plotFile} -r ${radarFile} -p ${passiveFile}
+				python2 ${CODE_PATH}plot_rad94_awipev.py -s ${plotFile} -r ${radarFile} -p ${passiveFile} > ${CODE_PATH}plot${DAY}_${hydro}_${radar}.out
 				newdata=0
 			fi
 		done
