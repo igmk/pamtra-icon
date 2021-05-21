@@ -84,7 +84,7 @@ def readPamtra_nc(ncfile):
     runDataset = Dataset(ncfile)
     runVars = runDataset.variables
     H = (runVars['height'][:,0,:])[:xDataLim,:]
-    ttt = pd.to_datetime(runVars['datatime'][:,0],unit='s')
+    ttt = pd.to_datetime(runVars['datatime'][:,0], unit='s')
     tt = (np.tile(ttt,(H.shape[1],1)).T)[:xDataLim,:]
     print(tt.shape, H.shape)
     a = 2.0*(runVars['Attenuation_Hydrometeors'][:,0,:,0,0] + runVars['Attenuation_Atmosphere'][:,0,:,0])
@@ -118,7 +118,7 @@ if passive89file is not None:
     pamtrafile = Dataset(passive89file)
     datavars = pamtrafile.variables
     datadims = pamtrafile.dimensions
-    datetime = nc.num2date(datavars['datatime'][:],
+    datetime = nc.num2date(datavars['datatime'][:, 0],
                            datavars['datatime'].units)
     timestamp = nc.date2num(datetime, 'seconds since 1970-01-01 00:00:00')
     tb = datavars['tb'][:,0,1,31,:,0] # downwelling at 0 meters
@@ -144,7 +144,7 @@ if passive89file is not None:
         if noxtick:
             ax.set_xticklabels([])
 
-    plot_one_frequency(ax4, datetime, tb[:,0], str(datavars['frequency'][0] )+'GHz')
+    plot_one_frequency(ax4, pd.to_datetime(timestamp, unit='s'), tb[:,0], str(datavars['frequency'][0] )+'GHz')
 
 #####################################
 
