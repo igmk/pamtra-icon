@@ -1,6 +1,3 @@
-from __future__ import division, print_function
-from sys import argv
-
 #################################################
 # temporary workaround issue #24
 import os
@@ -79,7 +76,6 @@ hydrostr = args.hydroset
 cores = args.numproc
 descFile = descFilesLib[args.descriptorfile]
 
-print(args)
 
 if '1mom' in args.descriptorfile:
 	pam = pyPamtra.importer.readIcon1momMeteogram(args.icon,

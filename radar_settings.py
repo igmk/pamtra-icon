@@ -1,4 +1,6 @@
 # DEFINE LIBRARY OF RADAR PROPRTIES
+
+# KiXPol was borrowed for TRIPEx2015
 KiXPolnml = {'radar_fwhr_beamwidth_deg':1.3,
              'radar_integration_time':1.0,
              'radar_k2':0.93,
@@ -21,6 +23,7 @@ Joyrad94nml = {'radar_fwhr_beamwidth_deg':0.5,
                'radar_peak_min_snr': -15,
                'frequency':94.0}
 
+# Joyrad10 has escaped to LMU
 Joyrad10nml = {'radar_fwhr_beamwidth_deg':1.0,
                'radar_integration_time':2.0,
                'radar_k2':0.93,
@@ -31,6 +34,7 @@ Joyrad10nml = {'radar_fwhr_beamwidth_deg':1.0,
                'radar_pnoise0':-11.9,#-48.0,
                'frequency':9.6}
 
+# aka MIRA
 Joyrad35nml = {'radar_fwhr_beamwidth_deg':0.6,
                'radar_integration_time':2.0,
                'radar_k2':0.93,
@@ -42,6 +46,7 @@ Joyrad35nml = {'radar_fwhr_beamwidth_deg':0.6,
                'radar_peak_min_snr':-10,
                'frequency':35.5}
 
+# Borrowed from Granada for TRIPEx-pol
 Grarad94nml = {'radar_fwhr_beamwidth_deg':0.5,
                'radar_integration_time':1.0,
                'radar_k2':0.93,
@@ -53,12 +58,44 @@ Grarad94nml = {'radar_fwhr_beamwidth_deg':0.5,
 #               'radar_peak_min_snr': 10,
                'frequency':94.0}
 
+# Hypothetical properties of dual freq G-band
+DracoG1nml = {'radar_fwhr_beamwidth_deg':0.5,
+              'radar_integration_time':1.0,
+              'radar_k2':0.93,
+              'radar_max_v':5.0,
+              'radar_min_v':-5.0,
+              'radar_nfft':512,
+              'radar_no_ave':20,
+              'radar_pnoise0':-15,#-48.0,
+              'frequency':167.3}
+
+# Hypothetical properties of dual freq G-band
+DracoG2nml = {'radar_fwhr_beamwidth_deg':0.5,
+              'radar_integration_time':1.0,
+              'radar_k2':0.93,
+              'radar_max_v':5.0,
+              'radar_min_v':-5.0,
+              'radar_nfft':512,
+              'radar_no_ave':20,
+              'radar_pnoise0':-15,#-48.0,
+              'frequency':174.8}
+              
+
+
 Default = {}
 
-radarlib = {'Joyrad10':Joyrad10nml, 'Joyrad35':Joyrad35nml, \
-            'Grarad94':Grarad94nml, 'KiXPol':KiXPolnml, \
-            'Joyrad94':Joyrad94nml, 'Default':Default, \
-            'hatpro':Default, 'joy94_passive89':Default}
+radarlib = {'Joyrad10':Joyrad10nml,
+            'Joyrad35':Joyrad35nml,
+            'Grarad94':Grarad94nml,
+            'KiXPol':KiXPolnml,
+            'Joyrad94':Joyrad94nml,
+            'Default':Default,
+            'hatpro':Default,
+            'joy94_passive89':Default,
+            'GRaWAC167':DracoG1nml,
+            'GRaWAC175':DracoG2nml,
+            'NyRAD35':Joyrad35nml} # just copy joyrad35 for now
+
 
 # DEFINE DICTIONARY OF HYDROMETOR CONTENT COMBINATIONS
 hydrodict = {'all_hydro'        :[1.,1.,1.,1.,1.,1.],
